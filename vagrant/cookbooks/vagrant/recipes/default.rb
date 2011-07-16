@@ -38,6 +38,16 @@ if File.exist?(local_recipe)
   eval File.read(local_recipe)
 end
 
+# Copy in sample YML files, if needed:
+for name in %w[settings database]
+  source = "#{APPDIR}/config/#{name}-sample.yml"
+  target = "#{APPDIR}/config/#{name}.yml"
+
+  execute "cp -a #{source} #{target}" do
+    not_if "test -e #{target}"
+  end
+end
+
 # Install bundle
 execute "install-bundle" do
   cwd APPDIR
