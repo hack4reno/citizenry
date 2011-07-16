@@ -20,7 +20,7 @@ Vagrant::Config.run do |config|
   # Assign this VM to a host only network IP, allowing you to access it
   # via the IP.
   if (defined?(NFS) && NFS) || defined?(ADDRESS)
-    config.vm.network defined?(ADDRESS) ? ADDRESS : "33.33.31.13"
+    config.vm.network defined?(ADDRESS) ? ADDRESS : "33.33.39.20"
   end
 
   # Forward a port from the guest to the host, which allows for outside
