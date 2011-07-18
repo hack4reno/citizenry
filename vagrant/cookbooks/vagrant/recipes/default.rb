@@ -48,6 +48,9 @@ for name in %w[settings database]
   end
 end
 
+# Fix permissions on homedir
+execute "chown -R #{USER}:#{USER} ~#{USER}"
+
 # Install bundle
 execute "install-bundle" do
   cwd APPDIR
