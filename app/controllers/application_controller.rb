@@ -48,13 +48,22 @@ class ApplicationController < ActionController::Base
       collection = collection.order(random_sort_clause)
     else
       clear_random_sort_seed
-      collection = collection.sorty(params)
+      begin
+        collection = collection.sorty(params)
+      rescue HeySorty::ArgumentError => e
+        flash[:error] = "Couldn't sort results by invalid sorting parameters."
+      end
     end
 
-    if params[:page] != 'all'
-      collection.paginate(:page => params[:page], :per_page => params[:per_page] || params[:grid] ? 28 : 30)
+    if params[:page] && params[:page].to_i != params[:page]
+      params.delete(:page)
+      flash[:error]  = "Couldn't paginate results by invalid page number."
+    end
+
+    if params[:page] == 'all'
+      collection.all
     else
-      collection
+      collection.paginate(:page => params[:page], :per_page => params[:per_page] || params[:grid] ? 28 : 30)
     end
   end
 
