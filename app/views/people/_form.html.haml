@@ -11,9 +11,9 @@
     = f.input :technology_list, :as => :text, :label => 'Technologies (languages, frameworks, etc)', :hint => "Comma separated, please", :input_html => {:class => 'tags'}
     - if mentoring_enabled?
       = f.inputs :name => "Mentoring" do
-        = f.input :interested_mentor, :label => "I am interested in mentoring", :hint => "Explanation Here"
+        = f.input :interested_mentor, :label => "I am interested in mentoring", :hint => "Would you like to mentor other people?"
         = f.input :mentor_topics, :label => "I am interested in mentoring these topics", :hint => "Comma separated, please"
-        = f.input :interested_mentee, :label => "I am interested in being mentored", :hint => "Explanation Here"
+        = f.input :interested_mentee, :label => "I am interested in being mentored", :hint => "Would you like to be mentored?"
         = f.input :mentee_topics, :label => "I am interested in being mentored in these topics", :hint => "Comma separated, please"
     = f.inputs :name => "Photo" do
       - if photo_url = @person.photo_import_url || (@person.photo.file? && @person.photo.url(:medium))
