@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    if params[:page] && params[:page].to_i != params[:page]
+    if params[:page] && params[:page].to_i.to_s != params[:page]
       params.delete(:page)
       flash[:error]  = "Couldn't paginate results by invalid page number."
     end
